@@ -1,0 +1,79 @@
+[
+    {
+        "id": "094a64af-4ccb-4728-9d3e-261a9886364c",
+        "username": "Testuser3",
+        "password": "test",
+        "firstName": "Test3",
+        "lastName": "User3",
+        "biography": "Test3",
+        "website": "test3.com",
+        "location": "test3",
+        "followers": [
+            "401056e5-b9e2-40b5-b78e-a1b875c5c97f",
+            "ca6d6c67-abaf-43ac-8636-7110670a1a84"
+        ],
+        "following": [
+            "d70578e0-b966-4cbb-ad1f-7c58dcb39726"
+        ],
+        "roles": [
+            "Standard"
+        ],
+        "kweets": []
+    },
+    {
+        "id": "401056e5-b9e2-40b5-b78e-a1b875c5c97f",
+        "username": "liwus",
+        "password": "liwus",
+        "firstName": "Li Wei",
+        "lastName": "Hu",
+        "biography": "Test",
+        "website": "yeet.com",
+        "location": "Venray",
+        "followers": 0,
+        "following": [
+            "094a64af-4ccb-4728-9d3e-261a9886364c"
+        ],
+        "roles": [
+            "Standard",
+            "Administrator"
+        ],
+        "kweets": []
+    },
+    {
+        "id": "ca6d6c67-abaf-43ac-8636-7110670a1a84",
+        "username": "Testuser",
+        "password": "test",
+        "firstName": "Test",
+        "lastName": "User",
+        "biography": "Test",
+        "website": "test.com",
+        "location": "test",
+        "followers": 0,
+        "following": [
+            "094a64af-4ccb-4728-9d3e-261a9886364c"
+        ],
+        "roles": [
+            "Standard",
+            "Moderator"
+        ],
+        "kweets": []
+    },
+    {
+        "id": "d70578e0-b966-4cbb-ad1f-7c58dcb39726",
+        "username": "Appelflappen",
+        "password": "test",
+        "firstName": "Appelflappen",
+        "lastName": "Appelflappen",
+        "biography": "Appelflappen",
+        "website": "Appelflappen.com",
+        "location": "Appelflappen",
+        "followers": [
+            "094a64af-4ccb-4728-9d3e-261a9886364c"
+        ],
+        "following": [],
+        "roles": [
+            "Standard"
+        ],
+        "kweets": []
+    }
+]

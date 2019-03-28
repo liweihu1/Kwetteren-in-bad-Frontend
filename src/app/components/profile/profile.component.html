@@ -1,0 +1,28 @@
+<div class="container padding">
+  <div class="row text-center">
+    <div class="col-sm-3">
+      <div class="block-container">
+        <h2>Profile</h2>
+        <div class="text-left">
+          <label>Userame: {{ user.username }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="col col-sm-6">
+      <div class="block-container">
+        <h2>Kweets</h2>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="block-container">
+        <h2>Details</h2>
+        <div clalss="text-left">
+          <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
+          <p>Location: {{ user.location }}</p>
+          <p>Website: {{ user.website }} </p>
+          <p>Bio: {{ user.biography }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
