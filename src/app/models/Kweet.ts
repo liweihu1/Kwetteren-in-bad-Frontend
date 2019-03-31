@@ -1,6 +1,7 @@
 export class Kweet {
     id: string;
     authorId: string;
+    authorUsername: string;
     message: string;
     dateCreated: Date;
     dateUpdated: Date;
@@ -12,6 +13,7 @@ export class Kweet {
         const {
             id = "",
             authorId = "",
+            authorUsername = "",
             message = "",
             dateCreated = null,
             dateUpdated = null,
@@ -22,6 +24,7 @@ export class Kweet {
 
         this.id = id;
         this.authorId = authorId;
+        this.authorUsername = authorUsername;
         this.message = message;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
@@ -34,6 +37,7 @@ export class Kweet {
 export interface KweetInterface {
     id: string;
     authorId: string;
+    authorUsername: string;
     message: string;
     dateCreated: Date;
     dateUpdated: Date;

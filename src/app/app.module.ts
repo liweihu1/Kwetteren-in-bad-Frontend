@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './components/admin/admin.component';
@@ -14,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { Constants } from './constants/api.consts';
 import { SearchComponent } from './components/search/search.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { KweetDashboardComponent } from './components/kweet-dashboard/kweet-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { SearchComponent } from './components/search/search.component';
     AdminComponent,
     LoginComponent,
     KweetComponent,
-    SearchComponent
+    SearchComponent,
+    TimeAgoPipe,
+    KweetDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +37,8 @@ import { SearchComponent } from './components/search/search.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {

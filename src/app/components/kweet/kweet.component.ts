@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Kweet } from 'src/app/models/Kweet';
 
 @Component({
@@ -8,11 +8,15 @@ import { Kweet } from 'src/app/models/Kweet';
 })
 export class KweetComponent implements OnInit {
   @Input() kweet: Kweet;
+  @Output() userChanged: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
-    console.log(this.kweet);
+  }
+
+  async goToUser(authorId: string) {
+    this.userChanged.emit(authorId);
   }
 }

@@ -12,9 +12,7 @@ export class UserService {
 
   async getUserWithId(id: string): Promise<User> {
     let headers = new HttpHeaders().set("Authorization", localStorage.getItem(Constants.TOKEN));
-    console.log(localStorage.getItem(Constants.TOKEN))
-    console.log(headers);
-    const result = await this.httpClient.get(Constants.API_URL + '/user/' + id, { headers: headers }).toPromise().then(this.getUserFromPromise);
+    const result = await this.httpClient.get(Constants.API_URL + '/user/' + id, { headers: headers }).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 

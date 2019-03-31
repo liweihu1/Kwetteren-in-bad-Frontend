@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Token } from 'src/app/models/Token';
 import { UserService } from '../user/user.service';
 import { User } from 'src/app/models/User';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { User } from 'src/app/models/User';
 export class JwtService {
   private redirectUrl: string;
   
-  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private toastr: ToastrService) { }
 
   async login (username: string, password: string) {
     this.httpClient.post(Constants.API_URL + '/Auth/login', {username, password}).toPromise().then((res: Token) => {
@@ -28,6 +29,8 @@ export class JwtService {
         this.router.navigate(['/home'])
       }
       this.redirectUrl = null;
+    }).catch(error => {
+      this.toastr.error("Something went wrong while trying to login!", "Login failed");
     });
   }
 
