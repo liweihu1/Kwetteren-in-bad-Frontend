@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  async login() {
     this.jwtService.login(this.loginForm.get('username').value, this.loginForm.get('password').value);
   }
 }

@@ -1,26 +1,46 @@
 <div class="container padding">
   <div class="row text-center">
     <div class="col-sm-3">
-      <div class="block-container">
-        <h2>Profile</h2>
-        <div class="text-left">
-          <label>Userame: {{ user.username }}</label>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <img class="btn-circle placeholder-size fit" src="../assets/user-placeholder.jpg">
+            </div>
+            <div class="col">
+              <h5 class="card-title">{{ user.username }}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-primary margin">Follow</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col col-sm-6">
-      <div class="block-container">
-        <h2>Kweets</h2>
-      </div>
+      <div class="card">
+          <div class="card-body">
+            <h2>Kweets</h2>
+            <ng-container *ngIf="kweets && kweets.length > 0">
+              <div *ngFor="let kweet of kweets">
+                <app-kweet [kweet]="kweet"></app-kweet>
+              </div>
+            </ng-container>
+          </div>
+        </div>
     </div>
     <div class="col-sm-3">
-      <div class="block-container">
-        <h2>Details</h2>
-        <div clalss="text-left">
-          <p>Name: {{ user.firstName }} {{ user.lastName }}</p>
-          <p>Location: {{ user.location }}</p>
-          <p>Website: {{ user.website }} </p>
-          <p>Bio: {{ user.biography }} </p>
+      <div class="card">
+        <div class="card-body">
+          <h2>Details</h2>
+          <div clalss="text-left">
+            <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
+            <p><strong>Location:</strong> {{ user.location }}</p>
+            <p><strong>Website:</strong> {{ user.website }} </p>
+            <p><strong>Bio:</strong> {{ user.biography }} </p>
+          </div>
         </div>
       </div>
     </div>
