@@ -14,7 +14,7 @@ De frontend voor de kwetteren in bad applicatie
 | Own kweets                                 |      |    x     |
 | Followers                                  |      |    x     |
 | Following                                  |      |    x     |
-| Search                                     |      |          |
+| Search                                     |      |    x     |
 | What's happening?                          |      |    x     |
 | Timeline                                   |      |    x     |
 | Login / Logout                             |      |    x     |
