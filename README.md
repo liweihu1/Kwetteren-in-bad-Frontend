@@ -12,11 +12,11 @@ De frontend voor de kwetteren in bad applicatie
 | Profile picture & profile name             |      |    x     |
 | Profile details                            |      |    x     |
 | Own kweets                                 |      |    x     |
-| Followers                                  |      |          |
-| Following                                  |      |          |
+| Followers                                  |      |    x     |
+| Following                                  |      |    x     |
 | Search                                     |      |          |
-| What's happening?                          |      |          |
-| Timeline                                   |      |          |
+| What's happening?                          |      |    x     |
+| Timeline                                   |      |    x     |
 | Login / Logout                             |      |    x     |
 | Login with moderator or administrator role |      |          |
 | Delete kweets from users                   |      |          |
