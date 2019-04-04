@@ -12,9 +12,9 @@
       </form>
     </ng-container>
     <ng-container *ngIf="kweets && kweets.length > 0">
-        <div *ngFor="let kweet of kweets">
-          <app-kweet [kweet]="kweet" (kweetDeleted)="deleteKweet($event)"></app-kweet>
-        </div>
+      <div *ngFor="let kweet of kweets">
+        <app-kweet [kweet]="kweet" (kweetDeleted)="deleteKweet($event)"></app-kweet>
+      </div>
     </ng-container>
   </div>
 </div>
