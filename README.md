@@ -19,5 +19,5 @@ De frontend voor de kwetteren in bad applicatie
 | Timeline                                   |      |    x     |
 | Login / Logout                             |      |    x     |
 | Login with moderator or administrator role |      |          |
-| Delete kweets from users                   |      |          |
+| Delete kweets from users                   |      |    x     |
 | Overview of all users and their roles      |      |          |
