@@ -25,6 +25,13 @@ export class KweetService {
     return result;
   }
 
+  async getKweetsForUserWithFollowing(userId: string): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/user/follow' + userId, this.setBearerToken()).toPromise().then(this.getKweetsFromPromise).catch(error => {
+      throw error;
+    });
+    return result;
+  } 
+
   private setBearerToken() {
     const headers = new HttpHeaders().set("Authorization", localStorage.getItem(Constants.TOKEN));
     return {headers: headers};

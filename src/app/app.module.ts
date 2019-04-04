@@ -18,6 +18,10 @@ import { Constants } from './constants/api.consts';
 import { SearchComponent } from './components/search/search.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { KweetDashboardComponent } from './components/kweet-dashboard/kweet-dashboard.component';
+import { FollowingCardComponent } from './components/following-card/following-card.component';
+import { FollowerCardComponent } from './components/follower-card/follower-card.component';
+import { UserInfoCardComponent } from './components/user-info-card/user-info-card.component';
+import { KweetOverviewCardComponent } from './components/kweet-overview-card/kweet-overview-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { KweetDashboardComponent } from './components/kweet-dashboard/kweet-dash
     KweetComponent,
     SearchComponent,
     TimeAgoPipe,
-    KweetDashboardComponent
+    KweetDashboardComponent,
+    FollowingCardComponent,
+    FollowerCardComponent,
+    UserInfoCardComponent,
+    KweetOverviewCardComponent
   ],
   imports: [
     BrowserModule,

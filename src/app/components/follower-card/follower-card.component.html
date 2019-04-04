@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header">
+    <a class="card-link">Followers {{ user.followers.length }}</a>
+  </div>
+  <div class="card-body">
+    <ng-container *ngFor="let name of user.followers">
+      <div class="inline padding">
+        <a routerLink="/profile/{{name}}">
+          <img class="btn-circle placeholder-size fit" src="../assets/user-placeholder.jpg" width="50" height="50">
+          <figcaption>{{name}}</figcaption>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</div>
