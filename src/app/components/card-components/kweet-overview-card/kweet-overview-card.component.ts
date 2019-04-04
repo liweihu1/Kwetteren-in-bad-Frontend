@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges, SimpleChanges, } from '@angular/core';
 import { KweetService } from 'src/app/services/kweet/kweet.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Kweet } from 'src/app/models/Kweet';
 import { User } from 'src/app/models/User';
-import { Constants } from 'src/app/constants/api.consts';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './kweet-overview-card.component.html',
   styleUrls: ['./kweet-overview-card.component.scss']
 })
-export class KweetOverviewCardComponent implements OnInit {
+export class KweetOverviewCardComponent implements OnInit, OnChanges {
   @ViewChild('message') messageArea: ElementRef;
 
   @Input() isLoggedInUser: boolean;
@@ -27,6 +26,11 @@ export class KweetOverviewCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getKweetsForUser();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     this.getKweetsForUser();
   }
 

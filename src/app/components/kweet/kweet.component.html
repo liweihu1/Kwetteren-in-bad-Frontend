@@ -5,8 +5,8 @@
                 <a routerLink="/profile/{{ kweet.author.username }}" class="card-link">{{ kweet.author.firstName }} {{ kweet.author.lastName }}</a>
                 <h6 class="card-subtitle mb-2 text-muted">@{{ kweet.author.username }}</h6>
             </div>
-            <p class="card-text">{{ kweet.message }}</p>
-            <p class="card-text"><small class="text-muted">{{kweet.dateCreated | timeAgo}}</small></p>
+            <p class="card-text text-black">{{ kweet.message }}</p>
+            <p class="card-text "><small class="text-muted">{{kweet.dateCreated | timeAgo}}</small></p>
         </div>
     </div>
 </ng-container>

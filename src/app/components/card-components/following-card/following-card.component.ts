@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../models/User';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-following-card',

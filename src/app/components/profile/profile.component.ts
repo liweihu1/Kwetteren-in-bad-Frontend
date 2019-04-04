@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/User';
 import { Constants } from 'src/app/constants/api.consts';
 import { Kweet } from 'src/app/models/Kweet';
 import { KweetService } from 'src/app/services/kweet/kweet.service';
-import { ToastrService, Toast } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  private user: User;
+  user: User;
   isLoggedInUser = false;
   isFollowButton = true;
   kweets: Array<Kweet> = [];
@@ -53,6 +53,10 @@ export class ProfileComponent implements OnInit {
 
   goToUser(username: string) {
     this.router.navigate(["/profile/" + username])
+  }
+
+  refreshData(user: User) {
+    this.getUserByUsername(user.username);
   }
 
   private getUserByUsername(username: string) {

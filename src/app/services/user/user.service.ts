@@ -26,6 +26,12 @@ export class UserService {
     return result;
   }
 
+  async updateUser(userId: string, newValues) {
+    const body = {id: userId, username: newValues.username, firstName: newValues.firstName, lastName: newValues.lastName, biography: newValues.biography, website: newValues.website, location: newValues.location};
+    const result = await this.httpClient.put(Constants.API_URL + '/user/update', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    return result;
+  }
+
   private getUserFromPromise(res: User): User {
     return res;
   }
