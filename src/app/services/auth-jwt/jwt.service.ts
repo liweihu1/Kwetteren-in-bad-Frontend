@@ -30,7 +30,7 @@ export class JwtService {
       }
       this.redirectUrl = null;
     }).catch(error => {
-      this.toastr.error("Something went wrong while trying to login!", "Login failed");
+      this.toastr.error("Make sure the username and password are correct!", "Login failed");
     });
   }
 

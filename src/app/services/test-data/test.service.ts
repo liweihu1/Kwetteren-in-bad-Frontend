@@ -32,6 +32,6 @@ export class TestService {
   }
 
   getKweetsForUser(id: string) : Array<Kweet> {
-    return this.kweets.filter( kweet => kweet.authorId === id);
+    return this.kweets.filter( kweet => kweet.author.id === id);
   }
 }

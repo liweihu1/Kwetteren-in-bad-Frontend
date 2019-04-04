@@ -1,7 +1,8 @@
+import { User } from './User';
+
 export class Kweet {
     id: string;
-    authorId: string;
-    authorUsername: string;
+    author: User;
     message: string;
     dateCreated: Date;
     dateUpdated: Date;
@@ -12,8 +13,7 @@ export class Kweet {
     constructor(obj : KweetInterface = {} as Kweet) {
         const {
             id = "",
-            authorId = "",
-            authorUsername = "",
+            author = null,
             message = "",
             dateCreated = null,
             dateUpdated = null,
@@ -23,8 +23,7 @@ export class Kweet {
         } = obj;
 
         this.id = id;
-        this.authorId = authorId;
-        this.authorUsername = authorUsername;
+        this.author = author;
         this.message = message;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
@@ -36,8 +35,7 @@ export class Kweet {
 
 export interface KweetInterface {
     id: string;
-    authorId: string;
-    authorUsername: string;
+    author: User;
     message: string;
     dateCreated: Date;
     dateUpdated: Date;

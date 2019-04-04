@@ -1,8 +1,10 @@
 <ng-container *ngIf="kweet">
     <div class="card text-left card-padding">
         <div class="body">
-            <a routerLink="/profile" (click)="goToUser(kweet.authorId)" class="card-link">{{ kweet.authorUsername }}</a>
-            <h6 class="card-subtitle mb-2 text-muted">@{{ kweet.authorUsername }}</h6>
+            <div>
+                <a routerLink="/profile/{{ kweet.author.username }}" class="card-link">{{ kweet.author.firstName }} {{ kweet.author.lastName }}</a>
+                <h6 class="card-subtitle mb-2 text-muted">@{{ kweet.author.username }}</h6>
+            </div>
             <p class="card-text">{{ kweet.message }}</p>
             <p class="card-text"><small class="text-muted">{{kweet.dateCreated | timeAgo}}</small></p>
         </div>

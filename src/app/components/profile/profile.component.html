@@ -1,6 +1,6 @@
-<div class="container padding">
+<div class="container padding" *ngIf="user">
   <div class="row text-center">
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -11,9 +11,14 @@
               <h5 class="card-title">{{ user.username }}</h5>
             </div>
           </div>
-          <div class="row" *ngIf="!isLoggedInUser">
+          <div class="row" *ngIf="!isLoggedInUser && userIsLoggedIn() && isFollowButton">
             <div class="col-md-12">
-              <a class="btn btn-primary margin">Follow</a>
+              <button class="btn btn-primary margin" (click)="followUser()">Follow</button>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isLoggedInUser && userIsLoggedIn() && !isFollowButton">
+            <div class="col-md-12">
+              <button class="btn btn-danger margin" (click)="unFollowUser()">Unfollow</button>
             </div>
           </div>
         </div>
@@ -23,34 +28,64 @@
       <div class="card">
           <div class="card-body">
             <h2>Kweets</h2>
+            <ng-container *ngIf="isLoggedInUser">
+              <form [formGroup]="postFormGroup" (ngSubmit)="postMessage()">
+                <div class="form-group">
+                  <textarea class="form-control" id="message" formControlName="kweetMessage" rows="4" required minlength="1" maxlength="140"></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block" type="submit">Post</button>
+                </div>
+              </form>
+            </ng-container>
             <ng-container *ngIf="kweets && kweets.length > 0">
-              <div *ngFor="let kweet of kweets">
-                <app-kweet [kweet]="kweet" (userChanged)="handleUserChanged($event)"></app-kweet>
-              </div>
+                <div *ngFor="let kweet of kweets">
+                  <app-kweet [kweet]="kweet"></app-kweet>
+                </div>
             </ng-container>
           </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
           <h2>Details</h2>
           <div class="text-left">
             <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
             <p><strong>Location:</strong> {{ user.location }}</p>
-            <p><strong>Website:</strong> {{ user.website }} </p>
-            <p><strong>Bio:</strong> {{ user.biography }} </p>
+            <p><strong>Website:</strong><a href="{{ user.website }}"> {{ user.website }}</a></p>
+            <p><strong>Bio:</strong> {{ user.biography }}</p>
           </div>
         </div>
       </div>
       <div class="card">
+        <div class="card-header">
+          <a class="card-link">Followers {{ user.followers.length }}</a>
+        </div>
         <div class="card-body">
-          <h2>Followers</h2>
+          <ng-container *ngFor="let name of user.followers">
+              <div class="inline">
+                  <a routerLink="/profile/{{name}}">
+                    <img class="btn-circle placeholder-size fit" src="../assets/user-placeholder.jpg" width="50" height="50">
+                    <figcaption>{{name}}</figcaption>
+                  </a>
+                </div>
+          </ng-container>
         </div>
       </div>
       <div class="card">
+        <div class="card-header">
+          <a class="card-link">Following {{ user.following.length }}</a>
+        </div>
         <div class="card-body">
-          <h2>Following</h2>
+          <ng-container *ngFor="let name of user.following">
+            <div class="inline">
+              <a routerLink="/profile/{{name}}">
+                <img class="btn-circle placeholder-size fit" src="../assets/user-placeholder.jpg" width="50" height="50">
+                <figcaption>{{name}}</figcaption>
+              </a>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

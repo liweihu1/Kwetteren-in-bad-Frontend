@@ -1,0 +1,29 @@
+.padding {
+    padding: 3em;
+}
+
+.margin {
+    margin: 10px;
+}
+
+.block-container {
+    display: block;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.placeholder-size {
+    width: 60px;
+    height: 60px;
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0 !important;
+}

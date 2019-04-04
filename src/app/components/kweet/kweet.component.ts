@@ -8,15 +8,10 @@ import { Kweet } from 'src/app/models/Kweet';
 })
 export class KweetComponent implements OnInit {
   @Input() kweet: Kweet;
-  @Output() userChanged: EventEmitter<string> = new EventEmitter();
 
   constructor() {
   }
 
   ngOnInit() {
-  }
-
-  async goToUser(authorId: string) {
-    this.userChanged.emit(authorId);
   }
 }
