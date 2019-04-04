@@ -9,15 +9,15 @@ De frontend voor de kwetteren in bad applicatie
 # Features
 | Feature                                    | Type | Finished |
 |--------------------------------------------|------|----------|
-| Profile picture & profile name             |      |          |
-| Profile details                            |      |          |
-| Own kweets                                 |      |          |
+| Profile picture & profile name             |      |    x     |
+| Profile details                            |      |    x     |
+| Own kweets                                 |      |    x     |
 | Followers                                  |      |          |
 | Following                                  |      |          |
 | Search                                     |      |          |
 | What's happening?                          |      |          |
 | Timeline                                   |      |          |
-| Login / Logout                             |      |          |
+| Login / Logout                             |      |    x     |
 | Login with moderator or administrator role |      |          |
 | Delete kweets from users                   |      |          |
 | Overview of all users and their roles      |      |          |
