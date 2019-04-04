@@ -17,6 +17,13 @@ export class KweetService {
     return result;
   }
 
+  async findKweetsWithSearch(search: string): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/search/' + search).toPromise().then(this.getKweetsFromPromise).catch(error => {
+      throw error;
+    });
+    return result;
+  }
+
   async postKweet(message: string, authorId: string): Promise<Kweet> {
     const body = {message: message, author: {id: authorId}};
     const result = await this.httpClient.post(Constants.API_URL + '/kweet/create', body, this.setBearerToken()).toPromise().then(this.getKweetFromPromise).catch(error => {

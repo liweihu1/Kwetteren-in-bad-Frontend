@@ -21,7 +21,6 @@ import { FollowingCardComponent } from './components/card-components/following-c
 import { FollowerCardComponent } from './components/card-components/follower-card/follower-card.component';
 import { UserInfoCardComponent } from './components/card-components/user-info-card/user-info-card.component';
 import { KweetOverviewCardComponent } from './components/card-components/kweet-overview-card/kweet-overview-card.component';
-import { KweetDashboardComponent } from './components/kweet-dashboard/kweet-dashboard.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -34,7 +33,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     KweetComponent,
     SearchComponent,
     TimeAgoPipe,
-    KweetDashboardComponent,
     FollowingCardComponent,
     FollowerCardComponent,
     UserInfoCardComponent,
