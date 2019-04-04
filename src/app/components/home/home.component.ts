@@ -14,11 +14,16 @@ import { Constants } from 'src/app/constants/api.consts';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isLoggedInUser = false;
+  user: User;
 
   constructor(){
-    
   }
 
   ngOnInit() {
+    if (localStorage.getItem(Constants.CURRENT_USER)) {
+      this.user = JSON.parse(localStorage.getItem(Constants.CURRENT_USER));
+      this.isLoggedInUser = true;
+    }
   }
 }

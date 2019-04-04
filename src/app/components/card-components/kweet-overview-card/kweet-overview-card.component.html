@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body text-white bg-primary">
-    <h2>Kweets</h2>
+    <h2>Latest kweets</h2>
     <ng-container *ngIf="isLoggedInUser">
       <form [formGroup]="postFormGroup" (ngSubmit)="postMessage()">
         <div class="form-group">
@@ -13,7 +13,7 @@
     </ng-container>
     <ng-container *ngIf="kweets && kweets.length > 0">
         <div *ngFor="let kweet of kweets">
-          <app-kweet [kweet]="kweet"></app-kweet>
+          <app-kweet [kweet]="kweet" (kweetDeleted)="deleteKweet($event)"></app-kweet>
         </div>
     </ng-container>
   </div>

@@ -1,10 +1,9 @@
 <ng-container *ngIf="kweet">
     <div class="card text-left card-padding">
         <div class="body">
-            <div>
-                <a routerLink="/profile/{{ kweet.author.username }}" class="card-link">{{ kweet.author.firstName }} {{ kweet.author.lastName }}</a>
-                <h6 class="card-subtitle mb-2 text-muted">@{{ kweet.author.username }}</h6>
-            </div>
+            <button *ngIf="checkAuthorForKweet()" class="btn btn-danger right btn-sm" (click)="deleteKweet()"><i class="fas fa-trash"></i></button>
+            <a routerLink="/profile/{{ kweet.author.username }}" class="card-link">{{ kweet.author.firstName }} {{ kweet.author.lastName }}</a>
+            <h6 class="card-subtitle mb-2 text-muted">@{{ kweet.author.username }}</h6>
             <p class="card-text text-black">{{ kweet.message }}</p>
             <p class="card-text "><small class="text-muted">{{kweet.dateCreated | timeAgo}}</small></p>
         </div>

@@ -21,13 +21,6 @@ export class JwtService {
       localStorage.setItem(Constants.LOCAL_ID, res.id);
       localStorage.setItem(Constants.LOCAL_USERNAME, res.username);
       this.saveUser();
-
-      if (this.redirectUrl) {
-        this.router.navigate([this.redirectUrl]);
-      } else {
-        this.router.navigate(['/home'])
-      }
-      this.redirectUrl = null;
     }).catch(error => {
       this.toastr.error("Make sure the username and password are correct!", "Login failed");
     });
@@ -36,6 +29,12 @@ export class JwtService {
   saveUser() {
     this.userService.getUserWithId(localStorage.getItem(Constants.LOCAL_ID)).then((res: User) => {
       localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
+      if (this.redirectUrl) {
+        this.router.navigate([this.redirectUrl]);
+      } else {
+        this.router.navigate(['/home'])
+      }
+      this.redirectUrl = null;
     });
   }
 

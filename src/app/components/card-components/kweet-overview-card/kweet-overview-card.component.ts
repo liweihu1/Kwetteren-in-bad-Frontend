@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Kweet } from 'src/app/models/Kweet';
 import { User } from 'src/app/models/User';
 import { ToastrService } from 'ngx-toastr';
+import { Constants } from 'src/app/constants/api.consts';
 
 @Component({
   selector: 'app-kweet-overview-card',
@@ -14,6 +15,7 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
   @ViewChild('message') messageArea: ElementRef;
 
   @Input() isLoggedInUser: boolean;
+  @Input() shouldShowAllKweets: boolean;
   @Input() user: User;
   
   kweets: Array<Kweet>;
@@ -47,6 +49,14 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     }
   }
 
+  deleteKweet(kweet: Kweet) {
+    this.kweetService.deleteKweet((JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).id), kweet.id).then(() => {
+      this.getKweetsForUser();
+    }).catch(() => {
+      this.toastr.error("Something went wrong while deleting the kweet. Try again later.");
+    });
+  }
+
   private checkForTooManyKweets() {
     if (this.kweets.length > 10) {
       this.kweets.pop();
@@ -54,8 +64,18 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
   }
 
   private getKweetsForUser() {
-    this.kweetService.getKweetsForUser(this.user.id).then(res => {
-      this.kweets = res;
-    });
+    if (!this.shouldShowAllKweets) {
+      this.kweetService.getKweetsForUser(this.user.id).then(res => {
+        this.kweets = res;
+      });
+    } else if (this.shouldShowAllKweets && this.user) {
+      this.kweetService.getKweetsForUserWithFollowing(this.user.id).then(res => {
+        this.kweets = res;
+      })
+    } else {
+      this.kweetService.getAllKweets().then(res => {
+        this.kweets = res;
+      })
+    }
   }
 }

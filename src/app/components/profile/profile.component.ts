@@ -3,7 +3,6 @@ import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/User';
 import { Constants } from 'src/app/constants/api.consts';
 import { Kweet } from 'src/app/models/Kweet';
-import { KweetService } from 'src/app/services/kweet/kweet.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -63,13 +62,13 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(["/profile/" + username])
   }
 
-  refreshData(user: User) {
-    console.log(user);
-    if (user.username === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).username) {
-      this.getUserByUsername(user.username);
+  refreshData(newUser: User) {
+    console.log(newUser);
+    if (newUser.username === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).username) {
+      this.getUserByUsername(newUser.username);
     } else {
-      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(user));
-      this.router.navigate(["/profile/" + user.username])
+      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(newUser));
+      this.router.navigate(["/profile/" + newUser.username])
     }
   }
 
