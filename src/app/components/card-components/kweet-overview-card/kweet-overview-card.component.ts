@@ -30,7 +30,6 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     this.getKweetsForUser();
   }
 

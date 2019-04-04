@@ -18,7 +18,7 @@
           </div>
           <div class="row" *ngIf="!isLoggedInUser && userIsLoggedIn() && !isFollowButton">
             <div class="col-md-12">
-              <button class="btn btn-danger margin" (click)="unFollowUser()">Unfollow</button>
+              <button class="btn btn-danger margin" (click)="unfollowUser()">Unfollow</button>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
       <app-kweet-overview-card [isLoggedInUser]="isLoggedInUser" [user]="user"></app-kweet-overview-card>
     </div>
     <div class="col-sm-3">
-      <app-user-info-card [user]="user" [isLoggedInUser]="isLoggedInUser" (refreshData)="refreshData(user)"></app-user-info-card>
+      <app-user-info-card [user]="user" [isLoggedInUser]="isLoggedInUser" (refreshData)="refreshData($event)"></app-user-info-card>
       <app-follower-card [user]="user"></app-follower-card>
       <app-following-card [user]="user"></app-following-card>
     </div>

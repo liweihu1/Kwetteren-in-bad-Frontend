@@ -17,7 +17,6 @@ export class JwtService {
 
   async login (username: string, password: string) {
     this.httpClient.post(Constants.API_URL + '/Auth/login', {username, password}).toPromise().then((res: Token) => {
-      console.log("hai there")
       localStorage.setItem(Constants.TOKEN, res.token);
       localStorage.setItem(Constants.LOCAL_ID, res.id);
       localStorage.setItem(Constants.LOCAL_USERNAME, res.username);
@@ -36,7 +35,6 @@ export class JwtService {
 
   saveUser() {
     this.userService.getUserWithId(localStorage.getItem(Constants.LOCAL_ID)).then((res: User) => {
-      console.log(res);
       localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
     });
   }

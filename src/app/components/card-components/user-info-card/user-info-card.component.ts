@@ -40,7 +40,6 @@ export class UserInfoCardComponent implements OnInit {
   }
 
   updateEditedUser(modal) {
-    this.checkUsernameAvailability();
     if (this.validator.validateUserInfo(this.editUserForm.value)) {
       this.userService.updateUser(this.user.id, this.editUserForm.value).then(res => {
         this.user = res;

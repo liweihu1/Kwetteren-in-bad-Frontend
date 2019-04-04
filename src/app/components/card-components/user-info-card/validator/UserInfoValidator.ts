@@ -7,7 +7,7 @@ export class UserInfoValidator {
     }
 
     validateUserInfo(values): boolean {
-        if (!values.firstName && !values.lastName && !values.website && !values.location && !values.biography) {
+        if (!values.username && !values.firstName && !values.lastName && !values.website && !values.location && !values.biography) {
             return false;
         }
         return true;

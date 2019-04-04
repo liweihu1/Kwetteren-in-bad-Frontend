@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   isFollowButton = true;
   kweets: Array<Kweet> = [];
 
-  constructor(private userService: UserService, private kweetService: KweetService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       if (!params['username']) {
         this.getUserByUsername(JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).username);
@@ -48,7 +48,15 @@ export class ProfileComponent implements OnInit {
   }
 
   unfollowUser() {
-    // TODO
+    this.userService.unfollowUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
+      this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
+        this.user = updatedUser;
+      });
+      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
+      this.checkIfCurrentUserIsFollowing();
+    }).catch(() => {
+      this.toastr.error("Something went wrong while unfollowing!");
+    });
   }
 
   goToUser(username: string) {
@@ -56,7 +64,13 @@ export class ProfileComponent implements OnInit {
   }
 
   refreshData(user: User) {
-    this.getUserByUsername(user.username);
+    console.log(user);
+    if (user.username === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).username) {
+      this.getUserByUsername(user.username);
+    } else {
+      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(user));
+      this.router.navigate(["/profile/" + user.username])
+    }
   }
 
   private getUserByUsername(username: string) {
@@ -71,9 +85,10 @@ export class ProfileComponent implements OnInit {
 
   private checkIfCurrentUserIsFollowing() {
     const res = JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).following;
-    console.log(res);
     if (res.includes(this.user.username)) {
       this.isFollowButton = false;
+    } else {
+      this.isFollowButton = true;
     }
   }
 
