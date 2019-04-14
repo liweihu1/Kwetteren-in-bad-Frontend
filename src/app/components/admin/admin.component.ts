@@ -8,10 +8,10 @@ import { Constants } from 'src/app/constants/api.consts';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  currentUser: string;
+  currentUser: User;
 
   constructor() { 
-    this.currentUser = localStorage.getItem(Constants.LOCAL_USERNAME);
+    this.currentUser = JSON.parse(localStorage.getItem(Constants.CURRENT_USER));
   }
 
   ngOnInit() {

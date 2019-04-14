@@ -24,18 +24,22 @@
     <div class="col-md 12">
       <div class="card">
         <div class="card-body text-white bg-primary">
-          <ng-container *ngIf="kweets && kweets.length > 0; else nothing">
+          <ng-container *ngIf="kweets && kweets.length > 0; else nothingFound">
             <div *ngFor="let kweet of kweets">
               <app-kweet [kweet]="kweet" (kweetDeleted)="deleteKweet($event)"></app-kweet>
             </div>
           </ng-container>
+          <button *ngIf="!noMoreKweets && !isFirstSearch" (click)="getNewKweets()" class="btn btn-block btn-light margin">Get more kweets</button>
+          <div *ngIf="noMoreKweets" class="margin text-center">
+            <h3>There are no more kweets available.</h3>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #nothing>
+<ng-template #nothingFound>
   <div>
     No kweets were found...
   </div>

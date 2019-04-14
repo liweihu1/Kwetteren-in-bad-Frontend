@@ -10,15 +10,15 @@ export class KweetService {
 
   constructor(private httpClient: HttpClient) { }
 
-  async getKweetsForUser(userId: string): Promise<Array<Kweet>> {
-    const result = await this.httpClient.get(Constants.API_URL + '/kweet/user/' + userId).toPromise().then(this.getKweetsFromPromise).catch(error => {
+  async getKweetsForUser(userId: string, page: number): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/user/' + userId + '/' + page).toPromise().then(this.getKweetsFromPromise).catch(error => {
       throw error;
     });
     return result;
   }
 
-  async findKweetsWithSearch(search: string): Promise<Array<Kweet>> {
-    const result = await this.httpClient.get(Constants.API_URL + '/kweet/search/' + search).toPromise().then(this.getKweetsFromPromise).catch(error => {
+  async findKweetsWithSearch(search: string, page: number): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/search/' + search + '/' + page).toPromise().then(this.getKweetsFromPromise).catch(error => {
       throw error;
     });
     return result;
@@ -32,15 +32,15 @@ export class KweetService {
     return result;
   }
 
-  async getKweetsForUserWithFollowing(userId: string): Promise<Array<Kweet>> {
-    const result = await this.httpClient.get(Constants.API_URL + '/kweet/user/follow/' + userId, this.setBearerToken()).toPromise().then(this.getKweetsFromPromise).catch(error => {
+  async getKweetsForUserWithFollowing(userId: string, page: number): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/user/follow/' + userId + '/' + page, this.setBearerToken()).toPromise().then(this.getKweetsFromPromise).catch(error => {
       throw error;
     });
     return result;
   } 
 
-  async getAllKweets(): Promise<Array<Kweet>> {
-    const result = await this.httpClient.get(Constants.API_URL + '/kweet').toPromise().then(this.getKweetsFromPromise).catch(error => {
+  async getAllKweets(pageNumber: number): Promise<Array<Kweet>> {
+    const result = await this.httpClient.get(Constants.API_URL + '/kweet/page/' + pageNumber).toPromise().then(this.getKweetsFromPromise).catch(error => {
       throw error;
     });
     return result;

@@ -18,7 +18,10 @@ export class KweetComponent implements OnInit {
   }
 
   checkAuthorForKweet(): boolean {
-    return this.kweet.author.id === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).id);
+    if (JSON.parse(localStorage.getItem(Constants.CURRENT_USER))) {
+      return this.kweet.author.id === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).id);
+    }
+    return false;
   }
 
   deleteKweet() {

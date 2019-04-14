@@ -17,7 +17,10 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
   @Input() isLoggedInUser: boolean;
   @Input() shouldShowAllKweets: boolean;
   @Input() user: User;
+
+  private pageNumber = 0;
   
+  noMoreKweets = false;
   kweets: Array<Kweet>;
 
   postFormGroup: FormGroup = new FormGroup({
@@ -31,7 +34,7 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     this.getKweetsForUser();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.getKweetsForUser();
   }
 
@@ -40,7 +43,6 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
       this.kweetService.postKweet(this.postFormGroup.get('kweetMessage').value, this.user.id).then(res => {
         if (res) {
           this.kweets.unshift(res);
-          this.checkForTooManyKweets();
           this.messageArea.nativeElement.value = '';
         }  
       });
@@ -57,25 +59,54 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     });
   }
 
-  private checkForTooManyKweets() {
-    if (this.kweets.length > 10) {
-      this.kweets.pop();
+  getNewKweets() {
+    this.pageNumber++;
+    if (!this.shouldShowAllKweets) {
+      this.kweetService.getKweetsForUser(this.user.id, this.pageNumber).then(res => {
+        this.checkForNoMoreKweets(res);
+      });
+    } else if (this.shouldShowAllKweets && this.user) {
+      this.kweetService.getKweetsForUserWithFollowing(this.user.id, this.pageNumber).then(res => {
+        this.checkForNoMoreKweets(res);
+      });
+    } else {
+      this.kweetService.getAllKweets(this.pageNumber).then(res => {
+        this.checkForNoMoreKweets(res);
+      });
+    }
+  }
+
+  private checkForNoMoreKweets(res: Array<Kweet>) {
+    if (res.length === 0) {
+      this.noMoreKweets = true;
+    } else if (res.length > 0 &&  res.length < 10) {
+      this.kweets = this.kweets.concat(res);
+      this.noMoreKweets = true;
+    } else {
+      this.kweets = this.kweets.concat(res);
     }
   }
 
   private getKweetsForUser() {
     if (!this.shouldShowAllKweets) {
-      this.kweetService.getKweetsForUser(this.user.id).then(res => {
+      this.kweetService.getKweetsForUser(this.user.id, this.pageNumber).then(res => {
         this.kweets = res;
       });
     } else if (this.shouldShowAllKweets && this.user) {
-      this.kweetService.getKweetsForUserWithFollowing(this.user.id).then(res => {
+      this.kweetService.getKweetsForUserWithFollowing(this.user.id, this.pageNumber).then(res => {
         this.kweets = res;
-      })
+      });
     } else {
-      this.kweetService.getAllKweets().then(res => {
+      this.kweetService.getAllKweets(this.pageNumber).then(res => {
         this.kweets = res;
-      })
+      });
+    }
+    this.checkCurrentKweets();
+  }
+
+  private checkCurrentKweets() {
+    if (this.kweets.length > 0 && this.kweets.length < 10) {
+      this.noMoreKweets = true;
     }
   }
 }

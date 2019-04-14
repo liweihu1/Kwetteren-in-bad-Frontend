@@ -19,7 +19,6 @@ export class JwtService {
     this.httpClient.post(Constants.API_URL + '/Auth/login', {username, password}).toPromise().then((res: Token) => {
       localStorage.setItem(Constants.TOKEN, res.token);
       localStorage.setItem(Constants.LOCAL_ID, res.id);
-      localStorage.setItem(Constants.LOCAL_USERNAME, res.username);
       this.saveUser();
     }).catch(error => {
       this.toastr.error("Make sure the username and password are correct!", "Login failed");
@@ -41,7 +40,6 @@ export class JwtService {
   logout() {
     localStorage.removeItem(Constants.TOKEN);
     localStorage.removeItem(Constants.LOCAL_ID);
-    localStorage.removeItem(Constants.LOCAL_USERNAME);
     localStorage.removeItem(Constants.CURRENT_USER);
   }
 

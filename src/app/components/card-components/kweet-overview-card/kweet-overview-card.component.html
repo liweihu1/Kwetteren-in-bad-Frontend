@@ -16,5 +16,9 @@
         <app-kweet [kweet]="kweet" (kweetDeleted)="deleteKweet($event)"></app-kweet>
       </div>
     </ng-container>
+    <button *ngIf="!noMoreKweets" (click)="getNewKweets()" class="btn btn-block btn-light margin">Get more kweets</button>
+    <div *ngIf="noMoreKweets" class="margin">
+      <h3>There are no more kweets available.</h3>
+    </div>
   </div>
 </div>

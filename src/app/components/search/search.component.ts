@@ -11,7 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SearchComponent implements OnInit {
 
-  kweets: Array<Kweet>;
+  kweets = new Array<Kweet>();
+
+  noMoreKweets = false;
+  pageNumber = 0;
+  isFirstSearch = true;
 
   searchForm = new FormGroup({
     search: new FormControl('')
@@ -24,10 +28,32 @@ export class SearchComponent implements OnInit {
 
   searchForKweets() {
     const search = this.searchForm.get('search').value;
-    this.kweetService.findKweetsWithSearch(search).then(res => {
-      this.kweets = res;
+    this.kweetService.findKweetsWithSearch(search, this.pageNumber).then(res => {
+      this.checkForNoMoreKweets(res);
+      this.isFirstSearch = false;
     }).catch(() => {
       this.toastr.error("Something went wrong while searching for kweets.");
     });
+  }
+
+  getNewKweets() {
+    this.pageNumber++;
+    const search = this.searchForm.get('search').value;
+    this.kweetService.findKweetsWithSearch(search, this.pageNumber).then(res => {
+      this.checkForNoMoreKweets(res);
+    }).catch(() => {
+      this.toastr.error("Something went wrong while searching for kweets.");
+    });
+  }
+
+  private checkForNoMoreKweets(res: Array<Kweet>) {
+    if (res.length === 0) {
+      this.noMoreKweets = true;
+    } else if (res.length > 0 &&  res.length < 10) {
+      this.kweets = this.kweets.concat(res);
+      this.noMoreKweets = true;
+    } else {
+      this.kweets = this.kweets.concat(res);
+    }
   }
 }
