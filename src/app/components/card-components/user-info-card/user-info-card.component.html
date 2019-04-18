@@ -1,16 +1,16 @@
 <ng-template #editProfileModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="modal-body">
     <form [formGroup]="editUserForm">
       <div class="form-group">
         <label for="name">Username</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="username" placeholder="Your username" minlength="1" value="" />
+          <input type="text" class="form-control" formControlName="username" placeholder="Your username" minlength="1" value="{{ user.username }}" />
           <span class="input-group-btn">
             <button class="btn btn-primary" type="button" (click)="checkUsernameAvailability()">Check</button>
           </span>
@@ -18,23 +18,23 @@
       </div>
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" formControlName="firstName" placeholder="Your firstName" minlength="1" value="" />
+        <input type="text" class="form-control" formControlName="firstName" placeholder="Your firstName" minlength="1" value="{{ user.firstName }}" />
       </div>
       <div class="form-group">
         <label for="name">Surname</label>
-        <input type="text" class="form-control" formControlName="lastName" placeholder="Your lastName" minlength="1" value="" />
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Your lastName" minlength="1" value="{{ user.lastName }}" />
       </div>
       <div class="form-group">
         <label for="name">Biography</label>
-        <input type="text" class="form-control" formControlName="biography" placeholder="I am a very cool person!"  minlength="1" maxlength="160" value="" />
+        <input type="text" class="form-control" formControlName="biography" placeholder="I am a very cool person!"  minlength="1" maxlength="160" value="{{ user.biography }}" />
       </div>
       <div class="form-group">
         <label for="name">Location</label>
-        <input type="text" class="form-control" formControlName="location" placeholder="Your location" minlength="1" value="" />
+        <input type="text" class="form-control" formControlName="location" placeholder="Your location" minlength="1" value="{{ user.location }}" />
       </div>
       <div class="form-group">
         <label for="name">Website</label>
-        <input type="text" class="form-control" formControlName="website" placeholder="Your website" minlength="1" value="" />
+        <input type="text" class="form-control" formControlName="website" placeholder="Your website" minlength="1" value="{{ user.website }}" />
       </div>
     </form>
   </div>

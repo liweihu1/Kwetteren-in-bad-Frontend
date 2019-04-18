@@ -45,6 +45,7 @@ export class UserInfoCardComponent implements OnInit {
         this.user = res;
         this.refreshData.emit(this.user);
         modal.close();
+        this.toastr.success("Your profile has been successfully updated!")
       }).catch(() => {
         this.toastr.error("Something went wrong while updating your info.");
       });

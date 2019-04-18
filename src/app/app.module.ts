@@ -21,7 +21,7 @@ import { FollowingCardComponent } from './components/card-components/following-c
 import { FollowerCardComponent } from './components/card-components/follower-card/follower-card.component';
 import { UserInfoCardComponent } from './components/card-components/user-info-card/user-info-card.component';
 import { KweetOverviewCardComponent } from './components/card-components/kweet-overview-card/kweet-overview-card.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FollowingCardComponent,
     FollowerCardComponent,
     UserInfoCardComponent,
-    KweetOverviewCardComponent
+    KweetOverviewCardComponent,
   ],
   imports: [
     BrowserModule,
