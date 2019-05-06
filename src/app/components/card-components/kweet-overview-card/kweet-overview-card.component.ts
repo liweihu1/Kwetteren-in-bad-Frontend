@@ -5,6 +5,7 @@ import { Kweet } from 'src/app/models/Kweet';
 import { User } from 'src/app/models/User';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/constants/api.consts';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-kweet-overview-card',
@@ -27,25 +28,39 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     kweetMessage: new FormControl('')
   });
 
-  constructor(private kweetService: KweetService, private toastr: ToastrService) {
+  constructor(private kweetService: KweetService, private wsService: WebsocketService, private toastr: ToastrService) {
+    this.kweets = new Array<Kweet>();
   }
 
   ngOnInit() {
     this.getKweetsForUser();
+    this.initSocketConnection();
   }
 
   ngOnChanges() {
     this.getKweetsForUser();
   }
 
+  initSocketConnection() {
+    this.wsService.connect(Constants.WEBSOCKET_URL);
+    this.wsService.onMessage().subscribe((res: Kweet) => {
+      this.kweets.unshift(res);
+      this.kweets.pop();
+      if (res.author.id === this.user.id) {
+        this.messageArea.nativeElement.value = '';
+      }
+    });
+  }
+
   postMessage() {
     if (this.postFormGroup.get('kweetMessage').valid) {
-      this.kweetService.postKweet(this.postFormGroup.get('kweetMessage').value, this.user.id).then(res => {
-        if (res) {
-          this.kweets.unshift(res);
-          this.messageArea.nativeElement.value = '';
-        }  
-      });
+      this.wsService.sendMessage(this.postFormGroup.get('kweetMessage').value, this.user.id);
+      // this.kweetService.postKweet(this.postFormGroup.get('kweetMessage').value, this.user.id).then(res => {
+      //   if (res) {
+      //     this.kweets.unshift(res);
+      //     this.messageArea.nativeElement.value = '';
+      //   }  
+      // });
     } else {
       this.toastr.error("The message can't be empty and should be shorter than 140 characters!");
     }
