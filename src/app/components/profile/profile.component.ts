@@ -30,10 +30,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  userIsLoggedIn(): boolean {
-    return (JSON.parse(localStorage.getItem(Constants.CURRENT_USER)));
-  }
-
   followUser() {
     this.userService.followUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
       this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
@@ -63,7 +59,6 @@ export class ProfileComponent implements OnInit {
   }
 
   refreshData(newUser: User) {
-    console.log(newUser);
     if (newUser.username === (JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).username) {
       this.getUserByUsername(newUser.username);
     } else {

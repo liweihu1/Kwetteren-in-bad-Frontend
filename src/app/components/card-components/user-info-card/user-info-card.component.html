@@ -45,7 +45,12 @@
 
 <div class="card">
   <div class="card-header text-white bg-primary">
-    <h2>Details</h2>
+    <span class="inline left">
+      <img class="btn-circle placeholder-size" src="../assets/user-placeholder.jpg">
+    </span>
+    <span class="inline align-middle vertical">
+      <h3 class="card-title">{{ user.username }}</h3>
+    </span>
   </div>
   <div class="card-body ">
     <div *ngIf="isLoggedInUser">

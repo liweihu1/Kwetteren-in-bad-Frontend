@@ -11,7 +11,7 @@ export class User {
     followers: Array<string>;
     following: Array<string>;
     roles: Array<string>;
-    kweets: Array<Kweet>;
+    kweets: number;
 
     constructor(obj: UserInterface = {} as User) {
         const {
@@ -25,7 +25,7 @@ export class User {
             followers = [],
             following = [],
             roles = [],
-            kweets = []
+            kweets = 0
         } = obj;
 
         this.id = id;
@@ -53,5 +53,5 @@ export interface UserInterface {
     followers: Array<string>;
     following: Array<string>;
     roles: Array<string>;
-    kweets: Array<Kweet>;
+    kweets: number;
 }

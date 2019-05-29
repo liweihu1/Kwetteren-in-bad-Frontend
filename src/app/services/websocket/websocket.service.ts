@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { webSocket, WebSocketSubject } from "rxjs/webSocket";
-import { Kweet } from 'src/app/models/Kweet';
+import { webSocket } from "rxjs/webSocket";
 import { Constants } from 'src/app/constants/api.consts';
 
 @Injectable({

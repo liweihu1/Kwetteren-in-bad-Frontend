@@ -1,6 +1,6 @@
 {
     "/api/*": {
-      "target": "http://localhost:8080/Kwetter",
+      "target": "http://localhost:8080/kwetter",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true

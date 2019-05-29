@@ -34,7 +34,9 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getKweetsForUser();
-    this.initSocketConnection();
+    if (localStorage.getItem(Constants.TOKEN)) {
+      this.initSocketConnection();
+    }
   }
 
   ngOnChanges() {
@@ -106,21 +108,23 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     if (!this.shouldShowAllKweets) {
       this.kweetService.getKweetsForUser(this.user.id, this.pageNumber).then(res => {
         this.kweets = res;
+        this.checkCurrentKweets();
       });
     } else if (this.shouldShowAllKweets && this.user) {
       this.kweetService.getKweetsForUserWithFollowing(this.user.id, this.pageNumber).then(res => {
         this.kweets = res;
+        this.checkCurrentKweets();
       });
     } else {
       this.kweetService.getAllKweets(this.pageNumber).then(res => {
         this.kweets = res;
+        this.checkCurrentKweets();
       });
     }
-    this.checkCurrentKweets();
   }
 
   private checkCurrentKweets() {
-    if (this.kweets.length > 0 && this.kweets.length < 10) {
+    if (this.kweets.length >= 0 && this.kweets.length < 10) {
       this.noMoreKweets = true;
     }
   }
