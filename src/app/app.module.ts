@@ -17,6 +17,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { Constants } from './constants/api.consts';
 import { SearchComponent } from './components/search/search.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { HeaderComponent } from './components/header/header.component';
 import { FollowingCardComponent } from './components/card-components/following-card/following-card.component';
 import { FollowerCardComponent } from './components/card-components/follower-card/follower-card.component';
 import { UserInfoCardComponent } from './components/card-components/user-info-card/user-info-card.component';
@@ -37,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FollowerCardComponent,
     UserInfoCardComponent,
     KweetOverviewCardComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
