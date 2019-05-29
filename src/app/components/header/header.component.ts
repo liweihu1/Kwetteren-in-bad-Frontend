@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if(!this.eRef.nativeElement.contains(event.target)) {
-      this.changeStatus;
+      this.focusOut();
     }
   }
 
