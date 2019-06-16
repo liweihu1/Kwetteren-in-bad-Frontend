@@ -63,4 +63,14 @@
       <p><strong>Bio:</strong> {{ user.biography }}</p>
     </div>
   </div>
+  <div class="row" *ngIf="!isLoggedInUser && isFollowButton">
+    <div class="col-md-12">
+      <button class="btn btn-primary margin" (click)="followUser()">Follow</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isLoggedInUser && !isFollowButton">
+    <div class="col-md-12">
+      <button class="btn btn-danger margin" (click)="unfollowUser()">Unfollow</button>
+    </div>
+  </div>
 </div>

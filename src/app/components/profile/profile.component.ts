@@ -30,30 +30,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  followUser() {
-    this.userService.followUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
-      this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
-        this.user = updatedUser;
-      });
-      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
-      this.checkIfCurrentUserIsFollowing();
-    }).catch(() => {
-      this.toastr.error("Something went wrong while following!");
-    });
-  }
-
-  unfollowUser() {
-    this.userService.unfollowUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
-      this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
-        this.user = updatedUser;
-      });
-      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
-      this.checkIfCurrentUserIsFollowing();
-    }).catch(() => {
-      this.toastr.error("Something went wrong while unfollowing!");
-    });
-  }
-
   goToUser(username: string) {
     this.router.navigate(["/profile/" + username])
   }
@@ -67,6 +43,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  refreshNonCurrentUserDate(newUser: User) {
+    this.user = newUser;
+  }
+
   private getUserByUsername(username: string) {
     this.userService.getUserWithUsername(username).then(res => {
       this.user = res;
@@ -76,7 +56,7 @@ export class ProfileComponent implements OnInit {
       this.toastr.error(err, "Something went wrong while retrieving the user.");
     }); 
   }
-
+  
   private checkIfCurrentUserIsFollowing() {
     const res = JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).following;
     if (res.includes(this.user.username)) {

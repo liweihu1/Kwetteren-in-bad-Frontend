@@ -47,7 +47,10 @@ export class KweetOverviewCardComponent implements OnInit, OnChanges {
     this.wsService.connect(Constants.WEBSOCKET_URL);
     this.wsService.onMessage().subscribe((res: Kweet) => {
       this.kweets.unshift(res);
-      this.kweets.pop();
+      if (this.kweets.length == 10) {
+        this.kweets.pop();
+        this.noMoreKweets = false;
+      }
       if (res.author.id === this.user.id) {
         this.messageArea.nativeElement.value = '';
       }

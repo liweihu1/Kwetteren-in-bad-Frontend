@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserInfoValidator } from './validator/UserInfoValidator';
+import { Constants } from 'src/app/constants/api.consts';
 
 @Component({
   selector: 'app-user-info-card',
@@ -14,7 +15,9 @@ import { UserInfoValidator } from './validator/UserInfoValidator';
 export class UserInfoCardComponent implements OnInit {
   @Input() user: User;
   @Input() isLoggedInUser: boolean;
+  @Input() isFollowButton: boolean;
   @Output() refreshData = new EventEmitter();
+  @Output() refreshNonUserData = new EventEmitter();
 
   private validator: UserInfoValidator;
 
@@ -43,6 +46,7 @@ export class UserInfoCardComponent implements OnInit {
     if (this.validator.validateUserInfo(this.editUserForm.value)) {
       this.userService.updateUser(this.user.id, this.editUserForm.value).then(res => {
         this.user = res;
+        localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(this.user));
         this.refreshData.emit(this.user);
         modal.close();
         this.toastr.success("Your profile has been successfully updated!")
@@ -63,6 +67,40 @@ export class UserInfoCardComponent implements OnInit {
       }).catch(() => {
         this.toastr.error("Something went wrong while checking the username availability. Please try again later.");
       })
+    }
+  }
+
+
+  followUser() {
+    this.userService.followUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
+      this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
+        this.refreshNonUserData.emit(updatedUser);
+      });
+      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
+      this.checkIfCurrentUserIsFollowing();
+    }).catch(() => {
+      this.toastr.error("Something went wrong while following!");
+    });
+  }
+
+  unfollowUser() {
+    this.userService.unfollowUserWithUsername((JSON.parse(localStorage.getItem(Constants.CURRENT_USER))).id, this.user.username).then(res => {
+      this.userService.getUserWithUsername(this.user.username).then(updatedUser => {
+        this.refreshNonUserData.emit(updatedUser);
+      });
+      localStorage.setItem(Constants.CURRENT_USER, JSON.stringify(res));
+      this.checkIfCurrentUserIsFollowing();
+    }).catch(() => {
+      this.toastr.error("Something went wrong while unfollowing!");
+    });
+  }
+
+  private checkIfCurrentUserIsFollowing() {
+    const res = JSON.parse(localStorage.getItem(Constants.CURRENT_USER)).following;
+    if (res.includes(this.user.username)) {
+      this.isFollowButton = false;
+    } else {
+      this.isFollowButton = true;
     }
   }
 }
