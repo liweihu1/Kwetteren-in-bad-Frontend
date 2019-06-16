@@ -16,7 +16,7 @@ export class JwtService {
   constructor(private httpClient: HttpClient, private router: Router, private userService: UserService, private toastr: ToastrService) { }
 
   async login (username: string, password: string) {
-    this.httpClient.post('auth/' + Constants.API_URL + '/auth/login', {username, password}).toPromise().then((res: Token) => {
+    this.httpClient.post('/auth/api/auth/login', {username, password}).toPromise().then((res: Token) => {
       localStorage.setItem(Constants.TOKEN, res.token);
       localStorage.setItem(Constants.LOCAL_ID, res.id);
       this.saveUser();
