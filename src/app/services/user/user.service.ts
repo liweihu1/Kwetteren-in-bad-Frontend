@@ -11,30 +11,30 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   async getUserWithId(id: string): Promise<User> {
-    const result = await this.httpClient.get(Constants.API_URL + '/user/byId/' + id).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    const result = await this.httpClient.get('kwetter/' + Constants.API_URL + '/user/byId/' + id).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 
   async getUserWithUsername(username: string): Promise<User> {
-    const result = await this.httpClient.get(Constants.API_URL + '/user/' + username).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    const result = await this.httpClient.get('kwetter/' + Constants.API_URL + '/user/' + username).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 
   async followUserWithUsername(currentUserId: string, userToFollowUsername: string) {
     const body = {userId: currentUserId, username: userToFollowUsername};
-    const result = await this.httpClient.post(Constants.API_URL + '/user/follow', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    const result = await this.httpClient.post('kwetter/' + Constants.API_URL + '/user/follow', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 
   async unfollowUserWithUsername(currentUserId: string, userToFollowUsername: string) {
     const body = {userId: currentUserId, username: userToFollowUsername};
-    const result = await this.httpClient.post(Constants.API_URL + '/user/unfollow', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    const result = await this.httpClient.post('kwetter/' + Constants.API_URL + '/user/unfollow', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 
   async updateUser(userId: string, newValues) {
     const body = {id: userId, username: newValues.username, firstName: newValues.firstName, lastName: newValues.lastName, biography: newValues.biography, website: newValues.website, location: newValues.location};
-    const result = await this.httpClient.put(Constants.API_URL + '/user/update', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
+    const result = await this.httpClient.put('kwetter/' + Constants.API_URL + '/user/update', body, this.setBearerToken()).toPromise().then(this.getUserFromPromise).catch(error => { throw error; });
     return result;
   }
 
